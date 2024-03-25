@@ -1,0 +1,56 @@
+[
+  {
+    "_id": "65fda56f19ad0083be6772ec",
+    "name": "Warren Robles",
+    "email": "warrenrobles@steeltab.com",
+    "role": "admin",
+    "active": false,
+    "photo": "user-3.jpg",
+    "password": ""
+  },
+  {
+    "_id": "65fda56f3a9fdbd02c04b81c",
+    "name": "Allen Mathews",
+    "email": "allenmathews@steeltab.com",
+    "role": "admin",
+    "active": false,
+    "photo": "user-4.jpg",
+    "password": ""
+  },
+  {
+    "_id": "65fda56fb19752bff3bd5284",
+    "name": "Shannon Lowery",
+    "email": "shannonlowery@steeltab.com",
+    "role": "admin",
+    "active": true,
+    "photo": "user-5.jpg",
+    "password": ""
+  },
+  {
+    "_id": "65fda56f507854de49ed447f",
+    "name": "Angie Sampson",
+    "email": "angiesampson@steeltab.com",
+    "role": "admin",
+    "active": false,
+    "photo": "user-4.jpg",
+    "password": ""
+  },
+  {
+    "_id": "65fda56fd197beab8a455604",
+    "name": "Ilene Spencer",
+    "email": "ilenespencer@steeltab.com",
+    "role": "admin",
+    "active": false,
+    "photo": "user-4.jpg",
+    "password": ""
+  },
+  {
+    "_id": "65fda56fd344ce84214473d6",
+    "name": "Wanda Dixon",
+    "email": "wandadixon@steeltab.com",
+    "role": "user",
+    "active": false,
+    "photo": "user-4.jpg",
+    "password": ""
+  }
+]
