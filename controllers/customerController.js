@@ -2,13 +2,52 @@ const Customer = require("./../models/customerModel");
 
 const getCustomers = async (req, res, next) => {
   try {
+    // basic filter
     const queryObject = { ...req.query };
     const excludeColumn = ["page", "sort", "limit", "fields"];
     excludeColumn.forEach((el) => delete queryObject[el]);
 
     console.log(req.query, queryObject);
 
-    const customers = await Customer.find(queryObject);
+    // advance filter
+    let queryStr = JSON.stringify(queryObject);
+    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`); // => $gt, $gte, $lte
+    queryStr = JSON.parse(queryStr);
+
+    let query = Customer.find(queryStr);
+
+    // sorting ASCENDING = name, kalau DESCENDING = -name (pake minus / strip)
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(",").join(" ");
+      query = query.sort(req.query.sort);
+      query = query.sort(sortBy);
+    } else {
+      query = query.sort("-createdAt");
+    }
+
+    // field limiting
+    if (req.query.fields) {
+      const fields = req.query.fields.split(",").join(" ");
+      query = query.select(fields);
+    } else {
+      query = query.select("-__v");
+    }
+
+    // 5. pagination
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 2;
+    const skip = (page - 1) * limit;
+
+    // page-3&limit=2 ===> data ke 5 dan 6
+    query = query.skip(skip).limit(limit);
+
+    if (req.query.page) {
+      const numCustomers = await Customer.countDocuments();
+      if (skip > numCustomers) throw new Error("page does not exist!");
+    }
+
+    // eksekusi query
+    const customers = await query;
 
     res.status(200).json({
       status: "success",

@@ -5,6 +5,9 @@ const customerSchema = new mongoose.Schema({
     type: String,
     required: [true, "Name cannot be empty"],
   },
+  age: {
+    type: Number,
+  },
   email: {
     type: String,
     unique: true,
@@ -12,7 +15,7 @@ const customerSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ["admin", "user"],
-    default: 'user',
+    default: "user",
   },
   active: {
     type: Boolean,
@@ -24,6 +27,10 @@ const customerSchema = new mongoose.Schema({
   },
   password: {
     type: String,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
   },
 });
 
